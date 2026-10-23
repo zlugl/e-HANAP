@@ -1,0 +1,8 @@
+{
+  "name": "Remix eHANAP - Job Matching System",
+  "description": "Cloud-based job matching and recruitment management platform using decision tree algorithm for PESO/LGU Oriental Mindoro, employers, and job seekers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

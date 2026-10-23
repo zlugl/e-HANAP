@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Allow public read for general platform data (Jobs, Employers, Announcements)
+    // and authenticated/demo read and write for the job board workflow
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    match /employers/{employerId} {
+      allow read, write: if true;
+    }
+
+    match /jobSeekers/{seekerId} {
+      allow read, write: if true;
+    }
+
+    match /jobPosts/{jobId} {
+      allow read, write: if true;
+    }
+
+    match /applications/{applicationId} {
+      allow read, write: if true;
+    }
+
+    match /interviews/{interviewId} {
+      allow read, write: if true;
+    }
+
+    match /notifications/{notificationId} {
+      allow read, write: if true;
+    }
+
+    match /auditLogs/{logId} {
+      allow read, write: if true;
+    }
+
+    match /announcements/{announcementId} {
+      allow read, write: if true;
+    }
+
+    match /jobSubscriptions/{subId} {
+      allow read, write: if true;
+    }
+
+    match /referralSlips/{slipId} {
+      allow read, write: if true;
+    }
+
+    match /lraEvents/{lraId} {
+      allow read, write: if true;
+    }
+
+    match /companyReviews/{reviewId} {
+      allow read, write: if true;
+    }
+
+    match /conversations/{conversationId} {
+      allow read, write: if true;
+    }
+
+    match /chatMessages/{messageId} {
+      allow read, write: if true;
+    }
+
+    match /profileViews/{viewId} {
+      allow read, write: if true;
+    }
+
+    match /bookmarks/{bookmarkId} {
+      allow read, write: if true;
+    }
+
+    // Default fallback
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

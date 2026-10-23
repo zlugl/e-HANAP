@@ -1,0 +1,258 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "description": "User account in the eHANAP Oriental Mindoro PESO system",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "employer", "job_seeker"] },
+        "name": { "type": "string" },
+        "avatar": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "email", "role", "name", "createdAt"]
+    },
+    "EmployerProfile": {
+      "title": "EmployerProfile",
+      "type": "object",
+      "description": "Verified business/employer registration profile with PESO Oriental Mindoro",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "companyName": { "type": "string" },
+        "representativeName": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "municipality": { "type": "string" },
+        "industry": { "type": "string" },
+        "companyDescription": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "verified", "for_compliance", "rejected", "suspended"] },
+        "businessPermitNo": { "type": "string" },
+        "dtiSecRegistration": { "type": "string" },
+        "bir2303No": { "type": "string" },
+        "complianceRemarks": { "type": "string" },
+        "businessPermitFile": { "type": "string" },
+        "dtiSecFile": { "type": "string" },
+        "bir2303File": { "type": "string" },
+        "verificationNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "companyName", "status", "municipality"]
+    },
+    "JobSeekerProfile": {
+      "title": "JobSeekerProfile",
+      "type": "object",
+      "description": "Job seeker resume profile and qualifications",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "address": { "type": "string" },
+        "municipality": { "type": "string" },
+        "headline": { "type": "string" },
+        "summary": { "type": "string" },
+        "highestEducation": { "type": "string" },
+        "education": { "type": "array" },
+        "workExperience": { "type": "array" },
+        "certifications": { "type": "array" },
+        "skills": { "type": "array" },
+        "technicalSkills": { "type": "array" },
+        "softSkills": { "type": "array" },
+        "resumes": { "type": "array" },
+        "activeResumeId": { "type": "string" },
+        "profileCompleteness": { "type": "number" },
+        "totalYearsExperience": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "fullName", "email", "municipality"]
+    },
+    "JobPost": {
+      "title": "JobPost",
+      "type": "object",
+      "description": "Job vacancy listing evaluated with Decision Tree matching",
+      "properties": {
+        "id": { "type": "string" },
+        "employerId": { "type": "string" },
+        "companyName": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "municipality": { "type": "string" },
+        "location": { "type": "string" },
+        "jobType": { "type": "string" },
+        "workSetup": { "type": "string" },
+        "salaryMin": { "type": "number" },
+        "salaryMax": { "type": "number" },
+        "description": { "type": "string" },
+        "postedDate": { "type": "string" },
+        "applicationDeadline": { "type": "string" },
+        "status": { "type": "string" },
+        "companyVerified": { "type": "boolean" },
+        "minEducationalAttainment": { "type": "string" },
+        "preferredDegree": { "type": "string" },
+        "degreeImportance": { "type": "string" },
+        "requiredSkills": { "type": "array" },
+        "preferredSkills": { "type": "array" },
+        "minExperienceYears": { "type": "number" },
+        "experienceImportance": { "type": "string" },
+        "technicalSkills": { "type": "array" },
+        "softSkills": { "type": "array" }
+      },
+      "required": ["id", "employerId", "title", "municipality", "status"]
+    },
+    "Application": {
+      "title": "Application",
+      "type": "object",
+      "description": "Job application record with Decision Tree match score",
+      "properties": {
+        "id": { "type": "string" },
+        "jobId": { "type": "string" },
+        "jobSeekerId": { "type": "string" },
+        "employerId": { "type": "string" },
+        "resumeId": { "type": "string" },
+        "appliedDate": { "type": "string" },
+        "status": { "type": "string" },
+        "matchScore": { "type": "number" },
+        "matchOutcome": { "type": "string" },
+        "matchBreakdown": { "type": "object" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "jobId", "jobSeekerId", "employerId", "status", "appliedDate"]
+    },
+    "Interview": {
+      "title": "Interview",
+      "type": "object",
+      "description": "Interview schedule between employer and applicant",
+      "properties": {
+        "id": { "type": "string" },
+        "applicationId": { "type": "string" },
+        "jobId": { "type": "string" },
+        "employerId": { "type": "string" },
+        "jobSeekerId": { "type": "string" },
+        "scheduledDate": { "type": "string" },
+        "scheduledTime": { "type": "string" },
+        "type": { "type": "string" },
+        "locationOrLink": { "type": "string" },
+        "status": { "type": "string" },
+        "instructions": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "applicationId", "scheduledDate", "status"]
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "type": "object",
+      "description": "In-app and email alert notification",
+      "properties": {
+        "id": { "type": "string" },
+        "recipientId": { "type": "string" },
+        "recipientRole": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "recipientId", "title", "message", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "type": "object",
+      "description": "PESO administrator and security audit trail record",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userRole": { "type": "string" },
+        "action": { "type": "string" },
+        "entity": { "type": "string" },
+        "entityId": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "action", "timestamp"]
+    },
+    "SystemAnnouncement": {
+      "title": "SystemAnnouncement",
+      "type": "object",
+      "description": "PESO Oriental Mindoro job fairs, announcements, and programs",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string" },
+        "priority": { "type": "string" },
+        "targetAudience": { "type": "string" }
+      },
+      "required": ["id", "title", "content", "date"]
+    },
+    "JobAlertSubscription": {
+      "title": "JobAlertSubscription",
+      "type": "object",
+      "description": "Job seeker keyword and municipality subscription for SMS/Email matching alerts",
+      "properties": {
+        "id": { "type": "string" },
+        "seekerId": { "type": "string" },
+        "title": { "type": "string" },
+        "keywords": { "type": "array" },
+        "municipality": { "type": "string" },
+        "category": { "type": "string" },
+        "minSalary": { "type": "number" },
+        "notifyEmail": { "type": "boolean" },
+        "notifySms": { "type": "boolean" },
+        "phoneNumber": { "type": "string" },
+        "email": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "seekerId", "title", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User accounts"
+    },
+    "/employers/{employerId}": {
+      "schema": "EmployerProfile",
+      "description": "Employer business profiles"
+    },
+    "/jobSeekers/{seekerId}": {
+      "schema": "JobSeekerProfile",
+      "description": "Job seeker resumes and qualifications"
+    },
+    "/jobPosts/{jobId}": {
+      "schema": "JobPost",
+      "description": "Job postings"
+    },
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Job applications"
+    },
+    "/interviews/{interviewId}": {
+      "schema": "Interview",
+      "description": "Scheduled interviews"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "NotificationItem",
+      "description": "System notifications"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "PESO audit log stream"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "SystemAnnouncement",
+      "description": "Public announcements and PESO bulletins"
+    },
+    "/jobSubscriptions/{subId}": {
+      "schema": "JobAlertSubscription",
+      "description": "Seeker notification alert criteria"
+    }
+  }
+}
